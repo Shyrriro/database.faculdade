@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema db_faculdade
+-- Schema nome_database
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema db_faculdade
+-- Schema nome_database
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db_faculdade` DEFAULT CHARACTER SET utf8 ;
-USE `db_faculdade` ;
+CREATE SCHEMA IF NOT EXISTS `nome_database` DEFAULT CHARACTER SET utf8 ;
+USE `nome_database` ;
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_departamento`
+-- Table `nome_database`.`tbl_departamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_departamento` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_departamento` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `sigla` CHAR(10) NOT NULL,
@@ -26,9 +26,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_curso`
+-- Table `nome_database`.`tbl_curso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_curso` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_curso` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `codigo` VARCHAR(10) NOT NULL,
@@ -40,16 +40,16 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_curso` (
   INDEX `fk_tbl_curso_tbl_departamento1_idx` (`departamento_id` ASC),
   CONSTRAINT `fk_tbl_curso_tbl_departamento1`
     FOREIGN KEY (`departamento_id`)
-    REFERENCES `db_faculdade`.`tbl_departamento` (`id`)
+    REFERENCES `nome_database`.`tbl_departamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_alunos`
+-- Table `nome_database`.`tbl_alunos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_alunos` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_alunos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome_completo` VARCHAR(255) NOT NULL,
   `data_nascimento` DATETIME NOT NULL,
@@ -73,16 +73,16 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_alunos` (
   INDEX `fk_tbl_alunos_tbl_curso_idx` (`curso_id` ASC),
   CONSTRAINT `fk_tbl_alunos_tbl_curso`
     FOREIGN KEY (`curso_id`)
-    REFERENCES `db_faculdade`.`tbl_curso` (`id`)
+    REFERENCES `nome_database`.`tbl_curso` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_professor`
+-- Table `nome_database`.`tbl_professor`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_professor` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_professor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome_completo` VARCHAR(255) NOT NULL,
   `cpf` VARCHAR(14) NOT NULL,
@@ -102,16 +102,16 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_professor` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   CONSTRAINT `fk_tbl_professor_tbl_departamento1`
     FOREIGN KEY (`departamento_id`)
-    REFERENCES `db_faculdade`.`tbl_departamento` (`id`)
+    REFERENCES `nome_database`.`tbl_departamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_disciplina`
+-- Table `nome_database`.`tbl_disciplina`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_disciplina` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_disciplina` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `carga_horaria` INT NOT NULL,
@@ -120,16 +120,16 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_disciplina` (
   INDEX `fk_tbl_disciplina_tbl_curso1_idx` (`curso_id` ASC),
   CONSTRAINT `fk_tbl_disciplina_tbl_curso1`
     FOREIGN KEY (`curso_id`)
-    REFERENCES `db_faculdade`.`tbl_curso` (`id`)
+    REFERENCES `nome_database`.`tbl_curso` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_turma`
+-- Table `nome_database`.`tbl_turma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_turma` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_turma` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `turma` VARCHAR(45) NOT NULL,
   `semestre` INT NOT NULL,
@@ -143,26 +143,26 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_turma` (
   INDEX `fk_tbl_turma_tbl_disciplina1_idx` (`disciplina_id` ASC),
   CONSTRAINT `fk_tbl_turma_tbl_departamento1`
     FOREIGN KEY (`departamento_id`)
-    REFERENCES `db_faculdade`.`tbl_departamento` (`id`)
+    REFERENCES `nome_database`.`tbl_departamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_turma_tbl_professor1`
     FOREIGN KEY (`professor_id`)
-    REFERENCES `db_faculdade`.`tbl_professor` (`id`)
+    REFERENCES `nome_database`.`tbl_professor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_turma_tbl_disciplina1`
     FOREIGN KEY (`disciplina_id`)
-    REFERENCES `db_faculdade`.`tbl_disciplina` (`id`)
+    REFERENCES `nome_database`.`tbl_disciplina` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_matricula`
+-- Table `nome_database`.`tbl_matricula`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_matricula` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_matricula` (
   `data` DATE NOT NULL,
   `alunos_id` INT NOT NULL,
   `turma_id` INT NOT NULL,
@@ -172,24 +172,27 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_matricula` (
   UNIQUE INDEX `alunos_id_UNIQUE` (`alunos_id` ASC),
   CONSTRAINT `fk_tbl_matricula_tbl_alunos1`
     FOREIGN KEY (`alunos_id`)
-    REFERENCES `db_faculdade`.`tbl_alunos` (`id`)
+    REFERENCES `nome_database`.`tbl_alunos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_matricula_tbl_turma1`
     FOREIGN KEY (`turma_id`)
-    REFERENCES `db_faculdade`.`tbl_turma` (`id`)
+    REFERENCES `nome_database`.`tbl_turma` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_notas`
+-- Table `nome_database`.`tbl_notas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_notas` (
+CREATE TABLE IF NOT EXISTS `nome_database`.`tbl_notas` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nota` DECIMAL(5,2) NOT NULL,
-  `unidade` INT NOT NULL,
+  `nota_unidade1` DECIMAL(5,2) NULL,
+  `nota_unidade2` DECIMAL(5,2) NULL,
+  `nota_unidade3` DECIMAL(5,2) NULL,
+  `nota_unidade4` DECIMAL(5,2) NULL,
+  `nota_final` DECIMAL(5,2) NULL,
   `disciplina_id` INT NOT NULL,
   `alunos_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -197,36 +200,12 @@ CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_notas` (
   INDEX `fk_tbl_notas_tbl_alunos1_idx` (`alunos_id` ASC),
   CONSTRAINT `fk_tbl_notas_tbl_disciplina1`
     FOREIGN KEY (`disciplina_id`)
-    REFERENCES `db_faculdade`.`tbl_disciplina` (`id`)
+    REFERENCES `nome_database`.`tbl_disciplina` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_notas_tbl_alunos1`
     FOREIGN KEY (`alunos_id`)
-    REFERENCES `db_faculdade`.`tbl_alunos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `db_faculdade`.`tbl_nota_final`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_faculdade`.`tbl_nota_final` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nota_final` DECIMAL(5,2) NOT NULL,
-  `disciplina_id` INT NOT NULL,
-  `alunos_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_tbl_nota_final_tbl_alunos1_idx` (`alunos_id` ASC),
-  INDEX `fk_tbl_nota_final_tbl_disciplina1_idx` (`disciplina_id` ASC),
-  CONSTRAINT `fk_tbl_nota_final_tbl_alunos1`
-    FOREIGN KEY (`alunos_id`)
-    REFERENCES `db_faculdade`.`tbl_alunos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tbl_nota_final_tbl_disciplina1`
-    FOREIGN KEY (`disciplina_id`)
-    REFERENCES `db_faculdade`.`tbl_disciplina` (`id`)
+    REFERENCES `nome_database`.`tbl_alunos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
